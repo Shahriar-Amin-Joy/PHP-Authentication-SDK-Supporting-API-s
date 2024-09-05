@@ -1,6 +1,6 @@
 {
     "name": "shahriaramin/auth-sdk-supporting-api",
-    "type": "library",
+    "type": "project",
     "description": "Supporting api for Auth SDK Package Library",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
