@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class OAuthController extends Controller
 {
-    public function redirectToProvider($provider)
+    public function redirectToProvider($provider, Request $request)
     {
         $oAuthProviderService = AuthProviderFactory::create($provider);
 
@@ -18,7 +18,7 @@ class OAuthController extends Controller
             return $oAuthProviderService;
         }
 
-        return $oAuthProviderService->redirectToProvider();
+        return $oAuthProviderService->redirectToProvider($request);
     }
 
     public function handleProviderCallback($provider)

@@ -20,12 +20,27 @@ class OAuthService implements AuthProviderInterface
     {
         $this->provider = $provider;
     }
-    public function redirectToProvider()
+    public function redirectToProvider(Request $request)
     {
         try {
-            return Socialite::driver($this->provider)->redirect();
-        } catch (\Exception $e){
-            return ExceptionHandler::handle($e, 'Error during redirecting to ' . $this->provider, 400);
+            $config = [
+                'client_id' => $request->input('client_id'),
+                'client_secret' => $request->input('client_secret'),
+                'redirect' => $request->input('redirect_uri'),
+            ];
+
+            config([
+                "services.{$this->provider}.client_id" => $config['client_id'],
+                "services.{$this->provider}.client_secret" => $config['client_secret'],
+                "services.{$this->provider}.redirect" => $config['redirect'],
+            ]);
+
+            $socialite = Socialite::driver($this->provider);
+            $redirectUrl = $socialite->stateless()->redirect()->getTargetUrl();
+
+            return response()->json(['redirect_url' => $redirectUrl]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error during redirecting to ' . $this->provider], 400);
         }
     }
 
