@@ -57,12 +57,12 @@ class AuthController extends Controller
 
             $refreshToken = $this->generateRefreshToken();
 
-            UserToken::create([
-                'user_id' => $user->id,
-                'token' => $token,
-                'refresh_token' => $refreshToken,
-            ]);
-
+            UserToken::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'token' => $token, 'refresh_token' => $refreshToken
+                ]
+            );
             return response()->json(['token' => $token], 200);
         } catch (\Exception $e){
             return ExceptionHandler::handle($e, 'Login failed', 500);
