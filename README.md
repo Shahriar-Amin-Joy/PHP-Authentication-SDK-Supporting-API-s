@@ -1,66 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Supporting API for Auth SDK
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Title
 
-## About Laravel
+Supporting API for Auth SDK
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Project Description
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This API supports the **Auth SDK** by providing the backend services necessary for user authentication, token management, OAuth integration, and role management. It is built using Laravel and is designed to handle various aspects of user authentication, including the generation and validation of JWT tokens, handling OAuth provider interactions, and managing user roles.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Table of Contents
 
-## Learning Laravel
+-   [Project Title](#project-title)
+-   [Project Description](#project-description)
+-   [Table of Contents](#table-of-contents)
+-   [Project Overview](#project-overview)
+    -   [Key Components](#key-components)
+    -   [Setup Instructions](#setup-instructions)
+        -   [Install Dependencies](#install-dependencies)
+        -   [Configure Environment Variables](#configure-environment-variables)
+        -   [Generate Application Key](#generate-application-key)
+        -   [Run Database Migrations](#run-database-migrations)
+        -   [Start the API Server](#start-the-api-server)
+-   [API Endpoints](#api-endpoints)
+-   [Conclusion](#conclusion)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Project Overview
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+The Supporting API for Auth SDK provides essential backend services for user authentication, role management, and OAuth integrations. The API is built on the Laravel framework and ensures secure handling of user data and tokens. It includes various services and components designed to work seamlessly with the Auth SDK.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Key Components
 
-## Laravel Sponsors
+-   **OAuthService**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    -   Handles OAuth-related functionality, including redirecting to the provider, processing provider callbacks, and managing OAuth tokens.
+-   **AuthProviderInterface**
 
-### Premium Partners
+    -   Defines a standardized contract for authentication providers, ensuring a consistent approach across different providers.
+-   **ExceptionHandler**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    -   Centralized exception handling for the API, ensuring consistent and informative error responses.
+-   **User Registration**
 
-## Contributing
+    -   Manages the creation of new user accounts with validation and error handling.
+-   **User Login**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    -   Authenticates users, generates JWT access and refresh tokens, and handles authentication errors.
+-   **Token Refresh**
 
-## Code of Conduct
+    -   Allows users to refresh their access tokens using valid refresh tokens.
+-   **Role Management**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    -   Facilitates the creation and management of user roles with proper validation and error handling.
+-   **User**
 
-## Security Vulnerabilities
+    -   Represents the user entity, including necessary attributes and relationships for user management.
+-   **UserToken**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    -   Manages user tokens, including generation, storage, updating, and refreshing.
 
-## License
+### Setup Instructions
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Follow these steps to set up and run the Supporting API:
+
+#### Install Dependencies
+
+Use Composer to install the required PHP dependencies:
+
+`composer install`
+
+#### Configure Environment Variables
+
+Create a new `.env` file from the provided example:
+
+`cp .env.example .env`
+
+Edit the `.env` file to include your specific configuration settings, such as database credentials and API keys.
+
+#### Generate Application Key
+
+Generate a unique application key for your Laravel application:
+
+`php artisan key:generate`
+
+#### Run Database Migrations
+
+Set up the database by running the necessary migrations:
+
+`php artisan migrate`
+
+#### Start the API Server
+
+Launch the server to make the API operational:
+
+`php artisan serve`
+
+The API will be accessible at `http://localhost:8000` or your specified base URL.
+
+## API Endpoints
+
+### Authentication Endpoints
+
+-   **POST /register**: Register a new user.
+-   **POST /login**: Authenticate a user and return a JWT token.
+-   **POST /add-user-role**: Add a role to a user (Admin access required).
+-   **POST /auth/refresh**: Refresh an access token using a valid refresh token.
+
+### OAuth Endpoints
+
+-   **POST /oauth/refresh**: Refresh an access token using a valid OAuth refresh token.
+-   **GET /auth/{provider}**: Redirect to the OAuth provider for authentication.
+-   **GET /auth/{provider}/callback**: Handle the callback from the OAuth provider.
+
+## Conclusion
+
+The Supporting API for Auth SDK provides a robust and secure backend solution for managing user authentication, token handling, and OAuth integrations. By following the setup instructions, you can quickly deploy and utilize this API to handle various authentication and authorization scenarios within your applications. For any questions or issues, please refer to the documentation or reach out to the maintainers for support.
